@@ -3,15 +3,11 @@ package me.mr_redstone5230.blockhats;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BlockHats extends JavaPlugin implements Listener {
-
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -25,6 +21,7 @@ public final class BlockHats extends JavaPlugin implements Listener {
 
     @EventHandler
     public static void onInvInteract(InventoryClickEvent event) {
+        //System.out.println("ff");
         if (event.getCursor().getType().equals(Material.AIR))
             return;
         if (!event.getSlotType().equals(InventoryType.SlotType.ARMOR))
