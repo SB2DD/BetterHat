@@ -1,6 +1,8 @@
 package me.mr_redstone5230.blockhats;
 
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
@@ -34,6 +36,10 @@ public final class BlockHats extends JavaPlugin implements Listener {
 
         ItemStack old = event.getCurrentItem();
         ItemStack cursor = event.getCursor();
+
+        if (!checkPermission(event.getWhoClicked(), cursor)) {
+            return;
+        }
 
         if(event.getClick().equals(ClickType.RIGHT)) {
             event.setCancelled(true);
@@ -96,11 +102,24 @@ public final class BlockHats extends JavaPlugin implements Listener {
         if (event.getClick().equals(ClickType.SHIFT_LEFT) || event.getClick().equals(ClickType.SHIFT_RIGHT)) {
             return;
         }
-
         event.setCancelled(true);
         event.setCurrentItem(cursor);
         event.getWhoClicked().setItemOnCursor(old);
 
 
+    }
+
+
+    public static boolean checkPermission(HumanEntity player, ItemStack item) {
+        return checkPermission(player, item.getType());
+    }
+    public static boolean checkPermission(HumanEntity player, Material material) {
+        if (!player.hasPermission("blockhats.usepermissions"))
+            return true;
+        else if (player.hasPermission("blockhats.*"))
+            return true;
+        else {
+            return player.hasPermission("blockhats." + material.name().toLowerCase());
+        }
     }
 }

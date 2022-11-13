@@ -3,3 +3,11 @@ version: ${project.version}
 main: me.mr_redstone5230.blockhats.BlockHats
 api-version: 1.16
 authors: [Mr_redstone5230]
+
+permissions:
+  '*':
+    description: Allows the player to put any item on his head.
+    default: op
+  usepermissions:
+    description: Makes the player only able to put items on his head that he has permission for with blockhats.{item type}
+    default: false
